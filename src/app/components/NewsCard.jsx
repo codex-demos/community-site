@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 const NewsCard = ({ article }) => {
   return (
     <Card
-      className="mb-4 shadow-lg max-w-md mx-auto"
-      style={{ width: '18rem' }}
+      className="mb-4 shadow-lg mx-auto"
+      style={{ width: '380px' }}
     >
       <Card.Img
         variant="top"
