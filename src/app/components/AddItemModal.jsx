@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { getAuth } from 'firebase/auth'; // Import for Firebase auth
 import { db } from '../firebaseConfig'; // Import your Firebase config file
 import { collection, addDoc } from 'firebase/firestore';
+
 const AddItemModal = ({ show, handleClose }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -11,8 +13,16 @@ const AddItemModal = ({ show, handleClose }) => {
   const [category, setCategory] = useState('');
   const [condition, setCondition] = useState('');
 
+  // Get the current user's ID from Firebase Authentication
+  const auth = getAuth();
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!userId) {
+      console.error('No user logged in');
+      return;
+    }
     try {
       const docRef = await addDoc(collection(db, 'items'), {
         title,
@@ -20,6 +30,8 @@ const AddItemModal = ({ show, handleClose }) => {
         price,
         category,
         condition,
+        // Include the user's ID
+        userId,
       });
       console.log('Document written with ID:', docRef.id);
       handleClose();

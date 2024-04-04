@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Signup = () => {
-  // Sample state setup for form fields, replace with useState hooks in your app
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const auth = getAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Firebase signup logic here
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      console.log('Signed up with:', userCredential.user);
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+    }
   };
 
   return (
