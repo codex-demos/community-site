@@ -5,7 +5,10 @@ import React from 'react';
 const ItemCard = ({ item }) => {
   const price = +item.price;
   return (
-    <div className="item-card">
+    <div
+      className="item-card flex flex-column gap-2 my-2"
+      style={{ backgroundColor: '#f7f7f7', width: '300px' }}
+    >
       {item.images && (
         <img
           src={item.images[0]}

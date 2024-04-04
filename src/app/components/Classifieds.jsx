@@ -18,9 +18,10 @@ const Classifieds = () => {
     fetchItems();
   }, []);
   return (
-    <div className="classifieds-container">
+    <div className="flex flex-column align-items-center">
       {items.map((item, index) => (
         <ItemCard
+         
           key={index}
           item={item}
         />

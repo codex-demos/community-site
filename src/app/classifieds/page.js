@@ -38,10 +38,10 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <NavBar />
       <div className="d-flex flex-column">
-        <Container>
+        <Container className="flex flex-column align-items-center">
           <Classifieds />
           <Button
-            variant="primary"
+            style={{ backgroundColor: 'blue' }}
             onClick={() => setModalShow(true)}
           >
             Add New Item
